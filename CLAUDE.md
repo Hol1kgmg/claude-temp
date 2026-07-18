@@ -25,6 +25,14 @@ See [{DIRECTORY_STRUCTURE_FILE}.md](./{DIRECTORY_STRUCTURE_FILE}.md) for details
 - File editing → `Edit` tool
 - File writing → `Write` tool
 
+**Denied Bash commands:**
+The following commands are blocked via Bash by `permissions.deny` in `.claude/settings.json`. Use the dedicated tools above instead.
+- `ls`, `find` → `Glob` tool
+- `cat`, `head`, `tail` → `Read` tool
+- `grep` → `Grep` tool
+- `sed`, `awk` → `Edit` tool
+- `curl` → `WebFetch` tool
+
 # Language Settings
-- Responses: {Japanese|English|その他の言語}
+- Responses: `.claude/settings.json` - `language`
 - Thinking: English (for token reduction)

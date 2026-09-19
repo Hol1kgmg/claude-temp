@@ -39,3 +39,16 @@ just / gitleaks / lefthook のインストールと Git フックの設定が一
 ```bash
 just          # 利用可能なタスク一覧
 ```
+
+## テンプレート同期
+
+テンプレート元の変更と lockfile の更新は、必要なときに手動で取り込みます。
+
+```bash
+just sync      # テンプレート元の変更を取り込む
+just update    # flake.lock / sources.lock.json を更新して検証する
+```
+
+`just sync` はマージコミットで取り込みます。PR 経由にする場合も **Create a merge commit** を使ってください（squash / rebase は共通祖先を壊します）。
+
+- 設計判断の記録: [adr/](adr/)

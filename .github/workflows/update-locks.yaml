@@ -1,0 +1,31 @@
+name: update-locks
+
+on:
+  schedule:
+    - cron: "0 0 * * 6" # 毎週土曜 09:00 JST
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: nix flake update
+      - run: nix run .#skills-sources-lock
+      - run: nix flake check
+      - uses: peter-evans/create-pull-request@v7
+        id: pr
+        with:
+          title: "chore: flake.lock / sources.lock.json を更新"
+          commit-message: "chore: flake.lock / sources.lock.json を更新"
+          branch: update-locks
+          delete-branch: true
+      - run: gh pr merge --squash --delete-branch --admin "$PR"
+        if: steps.pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ steps.pr.outputs.pull-request-number }}

@@ -57,6 +57,7 @@
             pkgs.gitleaks
             pkgs.lefthook
             pkgs.gh
+            pkgs.gh-dash
           ];
 
           shellHook = ''

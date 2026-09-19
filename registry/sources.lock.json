@@ -118,16 +118,16 @@
       },
       "vercel": {
         "branch": "main",
-        "hash": "sha256-iVOrjNW7DI/ZQCafQaMy5svexaxopIezJ+fexfpljUE=",
+        "hash": "sha256-Q/bR/kK6Peee/tIbHvvS7WWmNbmnIcwPRZEnwsADQ8k=",
         "repository": {
           "owner": "vercel",
           "repo": "ai",
           "type": "GitHub"
         },
-        "revision": "73ec7015edd4f04ca9144ce93a8a037a731e5db8",
+        "revision": "20dd00abba618d5a516e0fee40ccd3e18a2bd1fb",
         "submodules": false,
         "type": "Git",
-        "url": "https://github.com/vercel/ai/archive/73ec7015edd4f04ca9144ce93a8a037a731e5db8.tar.gz"
+        "url": "https://github.com/vercel/ai/archive/20dd00abba618d5a516e0fee40ccd3e18a2bd1fb.tar.gz"
       }
     },
     "version": 8

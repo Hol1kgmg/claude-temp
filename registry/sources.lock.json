@@ -81,16 +81,16 @@
     "pins": {
       "anthropic": {
         "branch": "main",
-        "hash": "sha256-tI4bTTBfI1ylltklGyiyA7pLoKXEWtrT6lrmwrpLbCw=",
+        "hash": "sha256-xUs7UX8pOcZwR0okaSbI/f8EE5F4Zi/BUd+nIZNafPc=",
         "repository": {
           "owner": "anthropics",
           "repo": "skills",
           "type": "GitHub"
         },
-        "revision": "34040c9c568585f6929bedeaad110ad08f079624",
+        "revision": "33375500bcea98d610eb30ce10ac4e59b89c390d",
         "submodules": false,
         "type": "Git",
-        "url": "https://github.com/anthropics/skills/archive/34040c9c568585f6929bedeaad110ad08f079624.tar.gz"
+        "url": "https://github.com/anthropics/skills/archive/33375500bcea98d610eb30ce10ac4e59b89c390d.tar.gz"
       },
       "cognitive-rhythm-writing": {
         "branch": "main",
@@ -118,16 +118,16 @@
       },
       "vercel": {
         "branch": "main",
-        "hash": "sha256-Q/bR/kK6Peee/tIbHvvS7WWmNbmnIcwPRZEnwsADQ8k=",
+        "hash": "sha256-l82IcnnPz6vEZLykaB2+79Lb6BGk5XSWKUpmDUt41zc=",
         "repository": {
           "owner": "vercel",
           "repo": "ai",
           "type": "GitHub"
         },
-        "revision": "20dd00abba618d5a516e0fee40ccd3e18a2bd1fb",
+        "revision": "8ff139b73483292518ba3ca17da1028005830f28",
         "submodules": false,
         "type": "Git",
-        "url": "https://github.com/vercel/ai/archive/20dd00abba618d5a516e0fee40ccd3e18a2bd1fb.tar.gz"
+        "url": "https://github.com/vercel/ai/archive/8ff139b73483292518ba3ca17da1028005830f28.tar.gz"
       }
     },
     "version": 8

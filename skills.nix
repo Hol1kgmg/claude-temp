@@ -15,5 +15,13 @@
   "cognitive-rhythm-writing"
   "japanese-tech-writing"
 
+  # addyosmani/web-quality-skills
+  "web-quality-audit"
+  "performance"
+  "core-web-vitals"
+  "accessibility"
+  "seo"
+  "best-practices"
+
   # ./skills（独自）
 ]

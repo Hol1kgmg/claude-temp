@@ -14,10 +14,23 @@ skills-list:
 skills-update:
     nix run .#skills-sources-lock
 
+# Install rules into .agents/rules
+rules:
+    nix run .#rules-install-local
+
+# List available rules
+rules-list:
+    nix run .#rules-list
+
+# Re-pin rule sources
+rules-update:
+    nix run .#rules-sources-lock
+
 # Update all locks, then check
 update:
     nix flake update
     nix run .#skills-sources-lock
+    nix run .#rules-sources-lock
     nix flake check
 
 # Merge template updates from upstream

@@ -6,9 +6,7 @@
     nur-packages.url = "github:Hol1kgmg/nur-packages";
     agent-rules.url = "github:Hol1kgmg/agent-rules-nix";
     agent-rules.inputs.nixpkgs.follows = "nixpkgs";
-    agent-rules.inputs.flake-utils.follows = "flake-utils";
     agent-rules.inputs.agent-skills.follows = "agent-skills";
-    agent-rules.inputs.nur-packages.follows = "nur-packages";
   };
 
   outputs = { nixpkgs, flake-utils, agent-skills, nur-packages, agent-rules, ... }:

@@ -1,5 +1,34 @@
 {
   "nodes": {
+    "agent-rules": {
+      "inputs": {
+        "agent-skills": [
+          "agent-skills"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nur-packages": [
+          "nur-packages"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791024229,
+        "narHash": "sha256-JozvkKHfygpL4/Zcw8MW4kE1Oy9uTFc+zPQa4RcLv1M=",
+        "owner": "Hol1kgmg",
+        "repo": "agent-rules-nix",
+        "rev": "e1629bdb3998f221982eaf35ed5e594660540e15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Hol1kgmg",
+        "repo": "agent-rules-nix",
+        "type": "github"
+      }
+    },
     "agent-skills": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -125,6 +154,7 @@
     },
     "root": {
       "inputs": {
+        "agent-rules": "agent-rules",
         "agent-skills": "agent-skills",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs_2",

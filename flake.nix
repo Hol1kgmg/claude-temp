@@ -47,7 +47,7 @@
         allowlist = import ./rules.nix;
       };
       ruleTargets = {
-        claude = rulesLib.defaultLocalTargets.claude // { enable = true; };
+        agents = rulesLib.defaultLocalTargets.claude // { dest = ".agents/rules"; enable = true; };
       };
     in
     flake-utils.lib.eachDefaultSystem (system:

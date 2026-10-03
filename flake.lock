@@ -16,11 +16,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791024229,
-        "narHash": "sha256-JozvkKHfygpL4/Zcw8MW4kE1Oy9uTFc+zPQa4RcLv1M=",
+        "lastModified": 1791032415,
+        "narHash": "sha256-MHig3/TfjPL41hAGHR84k2vvHOsqO8gQqxLmmEm82Ds=",
         "owner": "Hol1kgmg",
         "repo": "agent-rules-nix",
-        "rev": "e1629bdb3998f221982eaf35ed5e594660540e15",
+        "rev": "812b40ed1491974223719f995452b49fbb22a083",
         "type": "github"
       },
       "original": {

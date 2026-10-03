@@ -1,6 +1,6 @@
 .direnv/
 .agents/skills/
-.claude/rules/
+.agents/rules/
 .claude/settings.local.json
 
 .env

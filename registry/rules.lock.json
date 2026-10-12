@@ -24,16 +24,16 @@
     "pins": {
       "hol1kgmg": {
         "branch": "main",
-        "hash": "sha256-vDS7q7JEkxAbdQ0AMubxlK9PGvx81BcQi7+0Ch9cK9k=",
+        "hash": "sha256-4AuDRWut8050pUVpJ9oohqFW9m9wpAD35d20ZSVU/es=",
         "repository": {
           "owner": "Hol1kgmg",
           "repo": "rules",
           "type": "GitHub"
         },
-        "revision": "77067226e1dbbc89e026d82ab70aabd334c5c723",
+        "revision": "93ef794b57296d131f49f0c737459c7a35752bc2",
         "submodules": false,
         "type": "Git",
-        "url": "https://github.com/Hol1kgmg/rules/archive/77067226e1dbbc89e026d82ab70aabd334c5c723.tar.gz"
+        "url": "https://github.com/Hol1kgmg/rules/archive/93ef794b57296d131f49f0c737459c7a35752bc2.tar.gz"
       }
     },
     "version": 8

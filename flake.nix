@@ -7,9 +7,11 @@
     agent-rules.url = "github:Hol1kgmg/agent-rules-nix";
     agent-rules.inputs.nixpkgs.follows = "nixpkgs";
     agent-rules.inputs.agent-skills.follows = "agent-skills";
+    nix-claude-code.url = "github:ryoppippi/nix-claude-code";
+    nix-claude-code.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, flake-utils, agent-skills, nur-packages, agent-rules, ... }:
+  outputs = { nixpkgs, flake-utils, agent-skills, nur-packages, agent-rules, nix-claude-code, ... }:
     let
       agentLib = agent-skills.lib.agent-skills;
       rulesLib = agent-rules.lib.agent-rules;
@@ -99,6 +101,8 @@
             pkgs.gh
             pkgs.gh-dash
             nur-packages.packages.${system}.markserv
+            # gh は上で別途入れているため同梱版 default ではなく minimal
+            nix-claude-code.packages.${system}.claude-minimal
           ];
 
           shellHook = ''

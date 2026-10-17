@@ -1,15 +1,15 @@
 # Project Overview
-{プロジェクトの概要を記述 (例: Dotfiles management project for macOS using Nix and Home-Manager)}
+{Describe the project (e.g. Dotfiles management project for macOS using Nix and Home-Manager)}
 
 # Setup and Basic Usage
 Setup instructions and basic usage are documented in [README.md](./README.md).
 
 # Directory Structure
-{※ディレクトリ構造のドキュメントが不要な場合はこのセクションごと削除}
+{Remove this whole section if a directory structure document is not needed}
 See [{DIRECTORY_STRUCTURE_FILE}.md](./{DIRECTORY_STRUCTURE_FILE}.md) for details.
 
 # Troubleshooting
-{※トラブルシューティングのドキュメントが不要な場合はこのセクションごと削除}
+{Remove this whole section if a troubleshooting document is not needed}
 - Setup and daily usage issues: See [{TROUBLESHOOTING_FILE}.md](./{TROUBLESHOOTING_FILE}.md)
 
 # Work Rules
@@ -18,16 +18,16 @@ See [{DIRECTORY_STRUCTURE_FILE}.md](./{DIRECTORY_STRUCTURE_FILE}.md) for details
 3. Start implementation
 
 # Comment Policy
-- コードには How
-- テストコードには What
-- コミットログには Why
-- コードコメントには Why not
+- Code: How
+- Test code: What
+- Commit log: Why
+- Code comments: Why not
 
-コードコメントの細則:
-- コードから読み取れない理由 (why / why not) だけを書く。何をするか・どう動くかの説明は書かない。
-- 書く前に「この行を消してもコードから分かるか」を確認し、分かるなら書かない。
-- 残すのは背景や制約: 外部ライブラリの仕様、ブラウザ互換、過去の不具合の再発防止など。
-- 1 行に収める。長くなるなら設計の問題なのでコードを直す。
+Code comment rules:
+- Write only the reasons (why / why not) that cannot be read from the code. Do not describe what it does or how it works.
+- Before writing, ask "if this line were deleted, would the code still make it clear?" If yes, do not write it.
+- Keep only background and constraints: external library behavior, browser compatibility, preventing regressions of past bugs, etc.
+- Keep it to one line. If it gets longer, that is a design problem, so fix the code instead.
 
 # Tool Usage Policy
 **Prefer dedicated tools for file operations by default** (not enforced via `permissions.deny` — occasional Bash use is fine when it's genuinely more convenient):

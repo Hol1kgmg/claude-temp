@@ -2,7 +2,7 @@
 
 `flake.lock` の更新は Dependabot（`nix` ecosystem、[.github/dependabot.yml](../.github/dependabot.yml)）が担う。skill / rules の取得元も `flake = false` な input なので同じ仕組みに乗り、input ごとに PR が立つ。
 
-PR は auto-merge しない。`dependabot-review` スキルで差分をレビューし、`ci.yaml` の `nix flake check` が通ったものを手動でマージする。派生リポジトリにも `dependabot.yml` はそのまま降るので、追加設定なしで同じ運用になる。
+PR は auto-merge しない。`dependabot-review` スキルで差分をレビューし、`ci.yaml` の `nix flake check` が通ったものを手動でマージする。派生リポジトリにも `dependabot.yml` はそのまま降るので、追加設定なしで同じ運用になる。派生側で止める場合は各 `updates` エントリに `open-pull-requests-limit: 0` を書く。ファイルは同期対象なので削除しない。
 
 **なぜこの構成なのかは [adr/from-template/0003](../adr/from-template/0003-update-skill-sources-via-dependabot.md) にある。**
 

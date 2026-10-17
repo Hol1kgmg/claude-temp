@@ -1,29 +1,23 @@
 # lockfile の自動更新 — セットアップ手順
 
-テンプレート元 (`Hol1kgmg/claude-temp`) でのみ必要な設定。
+`flake.lock` の更新は Dependabot（`nix` ecosystem、[.github/dependabot.yml](../.github/dependabot.yml)）が担う。skill / rules の取得元も `flake = false` な input なので同じ仕組みに乗り、input ごとに PR が立つ。
 
-`update-locks` が毎週土曜 09:00 JST に走り、`flake.lock` と `registry/sources.lock.json` を更新する PR を作る。`ci.yaml` の `nix flake check` が通ると auto-merge される。`workflow_dispatch` で手動実行もできる。
+PR は auto-merge しない。`dependabot-review` スキルで差分をレビューし、`ci.yaml` の `nix flake check` が通ったものを手動でマージする。派生リポジトリにも `dependabot.yml` はそのまま降るので、追加設定なしで同じ運用になる。
 
-固定ブランチ `update-locks` を使うため、マージされずに残っても PR の本数は増えない。
+**なぜこの構成なのかは [adr/from-template/0003](../adr/from-template/0003-update-skill-sources-via-dependabot.md) にある。**
 
-派生リポジトリでは `if: github.repository` で workflow がスキップされるので、この設定は要らない。lockfile は `just update` で手動更新する。同じ自動化を派生リポジトリにも入れたくなった場合は、以下の手順がそのまま使える。
+## ブランチ保護
 
-**なぜこの構成なのかは [adr/from-template/0002](../adr/from-template/0002-use-github-app-for-write-access.md) にある。**
+main を保護し、必須チェックに `check` を指定する。
 
-## 1. GitHub App
+設定しないと `nix flake check` が落ちている PR もマージできてしまう。Dependabot の PR は `pull_request` トリガーで `ci.yaml` を起動するため、必須チェックにしておけば検証を経ないマージは起きない。
 
-権限は `Contents: Read and write` と `Pull requests: Read and write` のみ。このリポジトリにインストールし、`APP_ID` と `APP_PRIVATE_KEY` を Secrets に登録する。
+## 手動更新
 
-`GITHUB_TOKEN` では成立しない。それが作成した PR は workflow を発火させないため、必須チェックが付かず auto-merge が永久に止まる。
-
-## 2. ブランチ保護
-
-main を保護し、必須チェックに `check` を指定する。リポジトリ設定で auto-merge を有効化する。
-
-設定しないと `--auto` は待つ相手が無く即マージになり、lockfile の更新が検証を経ずに通る。
+Dependabot を待たずに更新したいときは `just update` を使う。`nix flake update` の後に `nix flake check` が走る。1 つの input だけ進めるなら `nix flake update <input名>`。
 
 ## 既知の弱点
 
-**スケジュール実行はリポジトリが60日間無活動になると自動停止する。** 静かに止まるため気づきにくい。lockfile の PR が毎週マージされていれば無活動にはならないので自立するが、何かの理由で一度止まると復帰しない。
+**Dependabot の `nix` 対応は 2026-04 に追加されたもので、gist のような plain git input の追従実績が少ない。** PR が立たない input があれば `just update` で補う。
 
 `ci.yaml` は PR が持ち込んだ flake を `nix flake check` で評価する。secrets を持たず token も読み取り専用なので漏洩経路にはならず、公開リポジトリの GitHub-hosted runner には課金も発生しない。見知らぬ相手の初回 PR は GitHub 既定の first-time contributor 承認で止まるため、追加の設定は要らない。外部コントリビュータが実際に現れたら Settings → Actions の `Require approval for all external contributors` を検討する。

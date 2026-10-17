@@ -46,9 +46,11 @@ direnv allow
 | markserv | `just docs` で Markdown を http://localhost:8080 に配信する |
 
 エージェント用スキルは `skills.nix` の宣言から devShell 起動時に `.agents/skills` へ同期されます
-（`just skills` / `just skills-list` / `just skills-update`）。独自スキルは [skills/](skills/) に置きます。
+（`just skills` / `just skills-list`）。取得元は `flake.nix` の `flake = false` な input で、独自スキルは [skills/](skills/) に置きます。
 エージェント用のルール（`.claude/rules/*.md`）も同じ流儀で、`rules.nix` の宣言から `.agents/rules` へ同期されます
-（`just rules` / `just rules-list` / `just rules-update`、取得元は [registry/rules/](registry/rules/)）。独自ルールは [rules/](rules/) に置きます。
+（`just rules` / `just rules-list`）。独自ルールは [rules/](rules/) に置きます。
+
+取得元の更新は Dependabot（`nix` ecosystem）が input ごとに PR を出します。マージ前に `dependabot-review` スキルで差分をレビューしてください。
 
 ## タスク
 
@@ -63,7 +65,7 @@ just docs     # Markdown を http://localhost:8080 で閲覧する
 
 ```bash
 just sync      # テンプレート元の変更を取り込む
-just update    # flake.lock / sources.lock.json を更新して検証する
+just update    # flake.lock を更新して検証する
 ```
 
 `just sync` はマージコミットで取り込みます。PR 経由にする場合も **Create a merge commit** を使ってください（squash / rebase は共通祖先を壊します）。

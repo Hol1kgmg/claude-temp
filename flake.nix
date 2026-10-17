@@ -9,19 +9,34 @@
     agent-rules.inputs.agent-skills.follows = "agent-skills";
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
     nix-claude-code.inputs.nixpkgs.follows = "nixpkgs";
+
+    # skill / rules の取得元。flake input にしておくと Dependabot (nix ecosystem) が
+    # input ごとに更新 PR を出し、dependabot-review でレビューできる
+    anthropic-skills = { url = "github:anthropics/skills"; flake = false; };
+    vercel-ai = { url = "github:vercel/ai"; flake = false; };
+    web-quality-skills = { url = "github:addyosmani/web-quality-skills"; flake = false; };
+    yomiyasu = { url = "github:nanaism/yomiyasu"; flake = false; };
+    hol1kgmg-skills = { url = "github:Hol1kgmg/skills"; flake = false; };
+    cognitive-rhythm-writing = { url = "git+https://gist.github.com/k16shikano/eb2929f13ed19c97188393d297be8432.git"; flake = false; };
+    japanese-tech-writing = { url = "git+https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"; flake = false; };
+    hol1kgmg-rules = { url = "github:Hol1kgmg/rules"; flake = false; };
   };
 
-  outputs = { nixpkgs, flake-utils, agent-skills, nur-packages, agent-rules, nix-claude-code, ... }:
+  outputs = inputs@{ nixpkgs, flake-utils, agent-skills, nur-packages, agent-rules, nix-claude-code, ... }:
     let
       agentLib = agent-skills.lib.agent-skills;
       rulesLib = agent-rules.lib.agent-rules;
 
-      # スキルの取得元は ./registry/sources、有効にする ID は ./skills.nix
-      sources = agentLib.sourcesFromLock {
-        manifestsDir = ./registry/sources;
-        lockFile = ./registry/sources.lock.json;
-      } // {
-        # 独自スキル。rev 固定が不要なため lock には載せない。
+      # 有効にする ID は ./skills.nix
+      sources = {
+        anthropic = { path = inputs.anthropic-skills.outPath; subdir = "skills"; };
+        vercel = { path = inputs.vercel-ai.outPath; subdir = "skills"; };
+        web-quality = { path = inputs.web-quality-skills.outPath; subdir = "skills"; };
+        yomiyasu = { path = inputs.yomiyasu.outPath; subdir = "skills"; };
+        hol1kgmg = { path = inputs.hol1kgmg-skills.outPath; subdir = "skills"; };
+        # gist はルート直下に SKILL.md があり、ファイル名がそのままスキル ID になる
+        cognitive-rhythm-writing = { path = inputs.cognitive-rhythm-writing.outPath; filter.maxDepth = 0; };
+        japanese-tech-writing = { path = inputs.japanese-tech-writing.outPath; filter.maxDepth = 0; };
         local = { path = ./skills; };
       };
       catalog = agentLib.discoverCatalog sources;
@@ -34,11 +49,9 @@
         agents = agentLib.defaultLocalTargets.agents // { enable = true; };
       };
 
-      # ルールの取得元は ./registry/rules、有効にする ID は ./rules.nix（skills と対称）
-      ruleSources = rulesLib.sourcesFromLock {
-        manifestsDir = ./registry/rules;
-        lockFile = ./registry/rules.lock.json;
-      } // {
+      # 有効にする ID は ./rules.nix（skills と対称）
+      ruleSources = {
+        hol1kgmg = { path = inputs.hol1kgmg-rules.outPath; subdir = "rules"; };
         local = { path = ./rules; };
       };
       ruleCatalog = rulesLib.discoverCatalog ruleSources;
@@ -68,12 +81,6 @@
 
         apps.rules-list = listApp "rules-list" (builtins.attrNames ruleCatalog);
 
-        # registry/rules/*.nix を解決して rules.lock.json を更新する
-        apps.rules-sources-lock = {
-          type = "app";
-          program = "${rulesLib.mkSourceLockProgram { inherit pkgs; }}/bin/rules-sources-lock";
-        };
-
         apps.rules-install-local = {
           type = "app";
           program = "${rulesLib.mkLocalInstallProgram { inherit pkgs; bundle = rulesBundle; targets = ruleTargets; }}/bin/rules-install-local";
@@ -81,12 +88,6 @@
 
         # sources から見つかった全スキル ID の一覧（skills.nix の候補）
         apps.skills-list = listApp "skills-list" (builtins.attrNames catalog);
-
-        # registry/sources/*.nix を解決して sources.lock.json を更新する
-        apps.skills-sources-lock = {
-          type = "app";
-          program = "${agentLib.mkSourceLockProgram { inherit pkgs; }}/bin/skills-sources-lock";
-        };
 
         apps.skills-install-local = {
           type = "app";

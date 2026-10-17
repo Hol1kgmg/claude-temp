@@ -113,6 +113,25 @@
         "versionUpperBound": null
       },
       "subdir": "skills"
+    },
+    "yomiyasu": {
+      "filter": {
+        "maxDepth": null,
+        "nameRegex": null
+      },
+      "idPrefix": null,
+      "pin": {
+        "at": null,
+        "branch": "main",
+        "owner": "nanaism",
+        "preReleases": false,
+        "releasePrefix": null,
+        "repo": "yomiyasu",
+        "submodules": false,
+        "type": "github",
+        "versionUpperBound": null
+      },
+      "subdir": "skills"
     }
   },
   "npins": {
@@ -192,6 +211,19 @@
         "submodules": false,
         "type": "Git",
         "url": "https://github.com/addyosmani/web-quality-skills/archive/afa8da942115f2961fdbfa80807ea0b232ff6c00.tar.gz"
+      },
+      "yomiyasu": {
+        "branch": "main",
+        "hash": "sha256-GuCSFIHzkQwpKhB06jihweDitz6WWYj6xKDdmd9HG/s=",
+        "repository": {
+          "owner": "nanaism",
+          "repo": "yomiyasu",
+          "type": "GitHub"
+        },
+        "revision": "1bc21f9c8e6a55fc4ccd5a2c7dfe78a7b0d814c5",
+        "submodules": false,
+        "type": "Git",
+        "url": "https://github.com/nanaism/yomiyasu/archive/1bc21f9c8e6a55fc4ccd5a2c7dfe78a7b0d814c5.tar.gz"
       }
     },
     "version": 8

@@ -61,6 +61,8 @@ just docs     # Markdown を http://localhost:8080 で閲覧する
 
 ## テンプレート同期
 
+生成直後は `init-from-template` スキルで README / AGENTS.md のプレースホルダを埋めてください。同期対象のファイルは削除しないこと（[adr/from-template/0001](adr/from-template/0001-sync-template-via-merge-commit.md)）。
+
 テンプレート元の変更と lockfile の更新は、必要なときに手動で取り込みます。
 
 ```bash

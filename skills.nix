@@ -31,4 +31,5 @@
   # "speckit-explain"
 
   # ./skills（独自）
+  "init-from-template"
 ]

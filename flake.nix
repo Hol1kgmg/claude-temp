@@ -17,6 +17,7 @@
     web-quality-skills = { url = "github:addyosmani/web-quality-skills"; flake = false; };
     yomiyasu = { url = "github:nanaism/yomiyasu"; flake = false; };
     hol1kgmg-skills = { url = "github:Hol1kgmg/skills"; flake = false; };
+    security-audit-skill = { url = "github:cloudflare/security-audit-skill"; flake = false; };
     cognitive-rhythm-writing = { url = "git+https://gist.github.com/k16shikano/eb2929f13ed19c97188393d297be8432.git"; flake = false; };
     japanese-tech-writing = { url = "git+https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"; flake = false; };
     hol1kgmg-rules = { url = "github:Hol1kgmg/rules"; flake = false; };
@@ -34,6 +35,7 @@
         web-quality = { path = inputs.web-quality-skills.outPath; subdir = "skills"; };
         yomiyasu = { path = inputs.yomiyasu.outPath; subdir = "skills"; };
         hol1kgmg = { path = inputs.hol1kgmg-skills.outPath; subdir = "skills"; };
+        security-audit = { path = inputs.security-audit-skill.outPath; subdir = "skills"; };
         # gist はルート直下に SKILL.md があり、ファイル名がそのままスキル ID になる
         cognitive-rhythm-writing = { path = inputs.cognitive-rhythm-writing.outPath; filter.maxDepth = 0; };
         japanese-tech-writing = { path = inputs.japanese-tech-writing.outPath; filter.maxDepth = 0; };

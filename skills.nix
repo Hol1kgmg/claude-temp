@@ -26,6 +26,9 @@
   # nanaism/yomiyasu
   "yomiyasu"
 
+  # cloudflare/security-audit-skill
+  "security-audit"
+
   # Hol1kgmg/skills（必要なリポジトリで有効化する）
   "dependabot-review"
   # "speckit-explain"

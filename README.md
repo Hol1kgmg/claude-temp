@@ -44,6 +44,7 @@ direnv allow
 | gitleaks / lefthook | pre-commit でステージ済みの差分をシークレット走査する（[lefthook.yaml](lefthook.yaml)） |
 | gh / gh-dash | GitHub 操作 |
 | markserv | `just docs` で Markdown を http://localhost:8080 に配信する |
+| claude / codex | コーディングエージェント（`AGENTS.md` と `.agents/` を共有して参照する） |
 
 エージェント用スキルは `skills.nix` の宣言から devShell 起動時に `.agents/skills` へ同期されます
 （`just skills` / `just skills-list`）。取得元は `flake.nix` の `flake = false` な input で、独自スキルは [skills/](skills/) に置きます。

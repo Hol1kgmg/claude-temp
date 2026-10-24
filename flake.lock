@@ -320,11 +320,11 @@
     "vercel-ai": {
       "flake": false,
       "locked": {
-        "lastModified": 1792185806,
-        "narHash": "sha256-upaSmaDaLPYcN4Rko9kTGXcn+k4TCdehtXBPbn5rT3M=",
+        "lastModified": 1792548818,
+        "narHash": "sha256-/fiCpVb/busd3kkCIGXFJC9tTh8HagDT9YwAIwFb0y4=",
         "owner": "vercel",
         "repo": "ai",
-        "rev": "fce9210c6405c0ad8452fee3f50717e8ea910b97",
+        "rev": "e6230e43ba9def164550eea562c457e23be9efa6",
         "type": "github"
       },
       "original": {

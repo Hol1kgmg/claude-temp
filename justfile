@@ -48,6 +48,8 @@ scan:
 scan-staged:
     gitleaks protect --staged --verbose
 
-# Serve markdown at http://localhost:8080
+# portless が worktree のブランチ名を前置するのは run のときだけ。リポジトリ名は worktree 内でも本体の .git から取る
+# PORTLESS=0 でプロキシを通さず起動したときは PORT が渡されない
+# Serve markdown at http://docs.<repo>.localhost:1355
 docs *ARGS:
-    markserv . -p 8080 -a 0.0.0.0 --browser=false {{ARGS}}
+    portless run --name docs.{{file_name(parent_directory(`git rev-parse --path-format=absolute --git-common-dir`))}} sh -c 'markserv . -p "${PORT:-8080}" -a 127.0.0.1 --browser=false "$@"' _ {{ARGS}}

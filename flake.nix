@@ -102,7 +102,9 @@
             pkgs.gitleaks
             pkgs.lefthook
             pkgs.gh
+            pkgs.dotenvx
             nur-packages.packages.${system}.markserv
+            nur-packages.packages.${system}.portless
             # gh は上で別途入れているため同梱版 default ではなく minimal
             nix-claude-code.packages.${system}.claude-minimal
             pkgs.codex

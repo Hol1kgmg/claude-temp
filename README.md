@@ -53,6 +53,19 @@ direnv allow
 エージェント用のルール（`.claude/rules/*.md`）も同じ流儀で、`rules.nix` の宣言から `.agents/rules` へ同期されます
 （`just rules` / `just rules-list`）。独自ルールは [rules/](rules/) に置きます。
 
+### テンプレート管理と派生先管理の分離
+
+`just sync` の衝突を避けるため、テンプレートが更新する部分と派生先が編集する部分を分けています。派生先では左の列だけを編集してください。
+
+| 派生先が編集する | テンプレートが管理する（編集しない） |
+|---|---|
+| `skills.nix` / `rules.nix`（`enable` で追加、`disable` で除外） | `skills.template.nix` / `rules.template.nix` |
+| `sources.nix`（skill / rules の取得元） | `sources.template.nix` |
+| `flake.nix` の `inputs` 末尾の「project inputs」区画 | `flake.nix` の `inputs` のそれ以外 |
+| `flake.nix` 末尾の `devShells.default` | `flake.nix` の `devShells.template` |
+
+`flake.lock` はどちらも更新するため、衝突したら手で解消してください。
+
 取得元の更新は Dependabot（`nix` ecosystem）が input ごとに PR を出します。マージ前に `dependabot-review` スキルで差分をレビューしてください。
 
 ## 環境変数

@@ -95,6 +95,7 @@
         devShells.template = pkgs.mkShell {
           packages = [
             pkgs.just
+            pkgs.jq
             pkgs.gitleaks
             pkgs.lefthook
             pkgs.gh

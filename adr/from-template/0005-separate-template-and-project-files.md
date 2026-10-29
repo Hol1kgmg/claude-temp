@@ -37,7 +37,7 @@ decision-makers: 'Hol1kgmg'
   - `flake.nix` の `inputs` 末尾: 独自の input を足していた場合、「project inputs」区画の追加と重なる
   - `flake.nix` の `devShells.default`: `packages` を足していた場合、テンプレート側を `devShells.template` に改名したことと重なる
 - Bad, because `flake.nix` の `inputs` と `devShells` は同じファイル内の区画分けに留まり、テンプレートが区画の境界付近を変えると衝突しうる
-- Bad, because `flake.lock` は両側が更新するため衝突が残る。自動解消は未決定
+- Bad, because `flake.lock` は両側が更新するため衝突が残る。自動解消は [ADR 0006](0006-automate-template-sync-pr.md) で決めた
 
 ## Implementation Plan
 

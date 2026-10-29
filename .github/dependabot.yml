@@ -3,8 +3,12 @@ updates:
   # .github/workflows/ 配下の全 workflow が対象。SHA pin と横の # vN コメントを更新する。
   - package-ecosystem: github-actions
     directory: /
+    # 派生側の template-sync（土曜 09:00）より前に終えるため nix と同じ時刻にそろえる
     schedule:
-      interval: monthly
+      interval: weekly
+      day: saturday
+      time: "08:00"
+      timezone: Asia/Tokyo
     cooldown:
       default-days: 2
 
@@ -16,7 +20,7 @@ updates:
     schedule:
       interval: weekly
       day: saturday
-      time: "09:00"
+      time: "08:00"
       timezone: Asia/Tokyo
     cooldown:
       default-days: 2

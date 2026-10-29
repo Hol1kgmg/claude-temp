@@ -20,5 +20,6 @@ ADR は決定そのものと、その背景・帰結を記録する。コード�
 | 0003 | [skill / rules の取得元を flake input にして Dependabot で更新する](0003-update-skill-sources-via-dependabot.md) | accepted (一部 0004 で置き換え) |
 | 0004 | [skill / rules 以外の Dependabot PR を auto-merge する](0004-auto-merge-non-skill-dependabot-prs.md) | accepted |
 | 0005 | [テンプレート管理と派生先管理の宣言を別ファイル・別区画に分ける](0005-separate-template-and-project-files.md) | accepted |
+| 0006 | [派生リポジトリにテンプレート取り込みの draft PR を週次で用意し、重複する Dependabot PR を閉じる](0006-automate-template-sync-pr.md) | accepted |
 
 lockfile 自動更新のセットアップ手順は [docs/lockfile-automation.md](../../docs/lockfile-automation.md) にある。

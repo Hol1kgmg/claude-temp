@@ -64,7 +64,7 @@ direnv allow
 | `flake.nix` の `inputs` 末尾の「project inputs」区画 | `flake.nix` の `inputs` のそれ以外 |
 | `flake.nix` 末尾の `devShells.default` | `flake.nix` の `devShells.template` |
 
-`flake.lock` はどちらも更新するため、衝突したら手で解消してください。
+`flake.lock` は両側が更新します。`just sync` が衝突を input 単位で自動解消します（下の「テンプレート同期」）。
 
 取得元の更新は Dependabot（`nix` ecosystem）が input ごとに PR を出します。マージ前に `dependabot-review` スキルで差分をレビューしてください。
 
@@ -96,13 +96,20 @@ sudo を不要にするため、[.envrc](.envrc) でプロキシを 1355 番・H
 
 生成直後は `init-from-template` スキルで README / AGENTS.md のプレースホルダを埋めてください。同期対象のファイルは削除しないこと（[adr/from-template/0001](adr/from-template/0001-sync-template-via-merge-commit.md)）。
 
-テンプレート元の変更と lockfile の更新は、必要なときに手動で取り込みます。
+テンプレート元が更新されると、`template-sync` workflow が毎週土曜 09:00 に draft PR（`template-sync` ブランチ）を用意します。手元で `just sync-pr` を実行すると、PR が取り込みの差分に置き換わり ready for review になります。
 
 ```bash
-just sync      # テンプレート元の変更を取り込む
+just sync-pr   # テンプレート元の変更を取り込む PR を作る
+just sync      # テンプレート元の変更を現在のブランチに取り込む
 just update    # flake.lock を更新して検証する
 ```
 
-`just sync` はマージコミットで取り込みます。PR 経由にする場合も **Create a merge commit** を使ってください（squash / rebase は共通祖先を壊します）。
+- PR は **Create a merge commit** でマージしてください（squash / rebase は共通祖先を壊します）
+- テンプレート元に open の Dependabot PR が残っていると、`just sync` / `just sync-pr` は止まります。処理が終わってから実行するか、`SYNC_IGNORE_OPEN_PRS=1` を付けて実行してください
+- `flake.lock` の衝突は、テンプレートの input をテンプレート側、`flake = false` の project inputs を派生先側の値で解消します。それ以外の衝突では止まるので、手で解消してください
+- テンプレートの input や workflow だけを更新する Dependabot PR は、取り込み PR と重複するため `template-dependabot-close` workflow が閉じます
+- draft PR の作成には、リポジトリ設定の **Allow GitHub Actions to create and approve pull requests** が必要です（`init-from-template` スキルが有効にします）
+
+設計: [adr/from-template/0006](adr/from-template/0006-automate-template-sync-pr.md)
 
 - 設計判断の記録: [adr/](adr/)

@@ -99,6 +99,7 @@
             pkgs.gitleaks
             pkgs.lefthook
             pkgs.gh
+            pkgs.git
             pkgs.dotenvx
             nur-packages.packages.${system}.markserv
             nur-packages.packages.${system}.portless

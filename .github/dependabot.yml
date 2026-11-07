@@ -1,4 +1,5 @@
 version: 2
+enable-beta-ecosystems: true
 updates:
   # .github/workflows/ 配下の全 workflow が対象。SHA pin と横の # vN コメントを更新する。
   - package-ecosystem: github-actions

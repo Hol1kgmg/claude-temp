@@ -1,3 +1,3 @@
 # 独自ルール
 
-このリポジトリ固有のルールを置く。`<rule-id>.instructions.md` を作成し、`apm.yml` の `dependencies.apm` に `./rules/<rule-id>.instructions.md` を追加すると `.claude/rules/<rule-id>.md` へ同期される。
+このリポジトリ固有のルールを置く。`<rule-id>.md` を作成し、`rules.nix` の `enable` に ID を追加すると `.agents/rules` へ同期される。

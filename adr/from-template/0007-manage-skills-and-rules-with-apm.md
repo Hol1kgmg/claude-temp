@@ -1,5 +1,5 @@
 ---
-status: 'accepted'
+status: 'superseded by 0008'
 date: 2026-11-07
 decision-makers: 'Hol1kgmg'
 ---
@@ -49,7 +49,7 @@ skill と rules の宣言と配置を APM に移し、agent-skills-nix / agent-r
 
 - [x] `.agents/skills` と `.claude/rules` の一覧と中身が移行前と一致する（yomiyasu は取得した版が新しい）
 - [x] `apm.lock.yaml` の衝突を再現し、派生先だけの依存が派生先側の commit のまま残る
-- [ ] Dependabot が `apm` ecosystem の PR を作成する。`packages/template/apm.yml` の依存と gist も対象になるか
+- [ ] Dependabot が `apm` ecosystem の PR を作成する。`packages/template/apm.yml` の依存と gist も対象になるか → 作成しない。0008 参照
 
 ## Alternatives Considered
 
@@ -60,6 +60,7 @@ skill と rules の宣言と配置を APM に移し、agent-skills-nix / agent-r
 
 ## More Information
 
+- 置き換えられた: [skill / rules の取得元を flake input に戻す](0008-revert-skill-sources-to-flake-inputs.md)
 - 一部置き換え: [skill / rules の取得元を flake input にして Dependabot で更新する](0003-update-skill-sources-via-dependabot.md)（取得元を flake input にする部分）
 - 一部置き換え: [テンプレート管理と派生先管理の宣言を別ファイル・別区画に分ける](0005-separate-template-and-project-files.md)（`skills*.nix` / `rules*.nix` / `sources*.nix` の部分）
 - Dependabot の apm 対応: https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager/

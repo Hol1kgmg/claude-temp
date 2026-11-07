@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.35.0
+apm_version: 0.34.0
 dependencies:
 - repo_url: _local/template
   name: template
@@ -18,11 +18,10 @@ dependencies:
     .agents/skills/template-sync-review/SKILL.md: sha256:deda8f9dfa60bd112fd51e50192cf049ab10f95bd0871adcd3bf2681a747c47a
   source: local
   local_path: ./packages/template
-  content_hash: sha256:f59220ff01221c116a57e70961a36ea6f3dddda3e357b49ff47a62b4483bdeb8
 - repo_url: anthropics/skills
   name: frontend-design
   host: github.com
-  resolved_commit: dbd4588f9e1033efb41dad4bef2f7947c8993d44
+  resolved_commit: 2c5958ecac7cee2b583967a2c4981d0f4a75c579
   resolved_ref: main
   version: unknown
   virtual_path: skills/frontend-design

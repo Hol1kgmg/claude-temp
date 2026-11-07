@@ -4,7 +4,6 @@ name: template
 version: 0.0.0
 dependencies:
   apm:
-    - anthropics/skills/skills/frontend-design
     - anthropics/skills/skills/skill-creator
     - anthropics/skills/skills/webapp-testing
 

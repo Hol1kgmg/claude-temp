@@ -5,3 +5,4 @@ targets: [agent-skills, claude]
 dependencies:
   apm:
     - ./packages/template
+    - anthropics/skills/skills/frontend-design#main

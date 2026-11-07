@@ -25,7 +25,10 @@ updates:
 
   # skill / rules はエージェントの挙動を変えるため、auto-merge せず dependabot-review でレビューする
   - package-ecosystem: apm
-    directory: /
+    # リモートの依存は packages/template 側にあり、ルートはそれをローカルパスで参照するだけのため両方を見る
+    directories:
+      - /
+      - /packages/template
     schedule:
       interval: weekly
       day: saturday

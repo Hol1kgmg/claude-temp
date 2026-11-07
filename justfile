@@ -2,21 +2,13 @@
 list:
     @just --list
 
-# Install skills into .claude/skills
-skills:
-    nix run .#skills-install-local
+# Install skills and rules into .agents/skills and .claude/rules
+apm:
+    apm install
 
-# List installed skills
-skills-list:
-    nix run .#skills-list
-
-# Install rules into .agents/rules
-rules:
-    nix run .#rules-install-local
-
-# List available rules
-rules-list:
-    nix run .#rules-list
+# List installed skills and rules
+apm-list:
+    apm deps list
 
 # Update flake.lock, then check
 update:
@@ -47,7 +39,7 @@ sync: _template-settled
     # マージコミットであることが必須。squash / rebase すると共通祖先が失われ、
     # 次回以降ツリー全体が衝突する（adr/from-template/0001）
     if git merge-base HEAD upstream/main >/dev/null 2>&1; then
-        git merge upstream/main --no-edit || { scripts/resolve-flake-lock.sh && git commit --no-edit; }
+        git merge upstream/main --no-edit || { scripts/resolve-locks.sh && git commit --no-edit; }
     else
         git merge upstream/main --allow-unrelated-histories --no-edit -X theirs
     fi

@@ -19,5 +19,6 @@ jobs:
         with:
           persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@786fff0690178f1234e4e1fe9b536e94f5433196 # v20
-      # resolve-flake-lock.sh の書き戻しと flake.nix のずれを、lock の自動更新で隠さない
+      # resolve-locks.sh の書き戻しと flake.nix のずれを、lock の自動更新で隠さない
       - run: nix flake check --no-update-lock-file
+      - run: nix develop .#template --no-update-lock-file -c apm install --frozen

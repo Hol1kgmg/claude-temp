@@ -1,0 +1,7 @@
+# 派生先が管理。独自 skill は ./skills/<id>、独自 rule は ./rules/<id>.instructions.md を足す。adr/from-template/0007
+name: project
+version: 0.0.0
+targets: [agent-skills, claude]
+dependencies:
+  apm:
+    - ./packages/template

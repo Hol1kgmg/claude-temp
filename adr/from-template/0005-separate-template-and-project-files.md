@@ -54,3 +54,4 @@ decision-makers: 'Hol1kgmg'
 ## More Information
 
 - 前提: [テンプレート元の変更を手動のマージコミットで取り込む](0001-sync-template-via-merge-commit.md)
+- 一部置き換えられた: [skill / rules を Nix から APM に移す](0007-manage-skills-and-rules-with-apm.md)（`skills*.nix` / `rules*.nix` / `sources*.nix` の部分）

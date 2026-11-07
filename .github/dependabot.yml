@@ -29,7 +29,6 @@ updates:
     directories:
       - /
       - /packages/template
-    target-branch: test/dependabot-apm-branch-pin
     schedule:
       interval: weekly
       day: saturday

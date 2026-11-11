@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.35.0
+apm_version: 0.34.0
 dependencies:
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
@@ -152,7 +152,7 @@ dependencies:
 - repo_url: vercel/ai
   name: adr-skill
   host: github.com
-  resolved_commit: 85b920f29ea7b5d45ef254195e56afa98e93b833
+  resolved_commit: 70e45d5878494be4b66e325187f865951025059e
   resolved_ref: main
   version: unknown
   virtual_path: skills/adr-skill

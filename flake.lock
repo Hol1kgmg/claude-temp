@@ -94,11 +94,11 @@
     "hol1kgmg-rules": {
       "flake": false,
       "locked": {
-        "lastModified": 1791780068,
-        "narHash": "sha256-4AuDRWut8050pUVpJ9oohqFW9m9wpAD35d20ZSVU/es=",
+        "lastModified": 1794011710,
+        "narHash": "sha256-MIItq0WFEdgW/VvSqurjVZVh1ujCiWVj+3tReNy/Mv4=",
         "owner": "Hol1kgmg",
         "repo": "rules",
-        "rev": "93ef794b57296d131f49f0c737459c7a35752bc2",
+        "rev": "9052b86c5e5820d3919dc2553fcf21402592d2c5",
         "type": "github"
       },
       "original": {

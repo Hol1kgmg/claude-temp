@@ -1,0 +1,28 @@
+# 検証用: 取得元をすべてルートに #main で直接書いたとき、Dependabot が取得元ごとに PR を立てるか
+name: project
+version: 0.0.0
+targets: [agent-skills, claude]
+dependencies:
+  apm:
+    # --- テンプレート管理 ---
+    - anthropics/skills/skills/frontend-design#main
+    - anthropics/skills/skills/skill-creator#main
+    - anthropics/skills/skills/webapp-testing#main
+
+    - vercel/ai/skills/adr-skill#main
+
+    - addyosmani/web-quality-skills/skills/web-quality-audit#main
+    - addyosmani/web-quality-skills/skills/performance#main
+    - addyosmani/web-quality-skills/skills/core-web-vitals#main
+    - addyosmani/web-quality-skills/skills/accessibility#main
+    - addyosmani/web-quality-skills/skills/seo#main
+    - addyosmani/web-quality-skills/skills/best-practices#main
+
+    - cloudflare/security-audit-skill/skills/security-audit#main
+
+    - Hol1kgmg/skills/skills/dependabot-review#main
+    - Hol1kgmg/skills/skills/cognitive-rhythm-writing#main
+    - Hol1kgmg/skills/skills/japanese-tech-writing#main
+
+    - Hol1kgmg/rules/rules/orca-worktree.instructions.md#main
+    # --- 派生先管理 ---

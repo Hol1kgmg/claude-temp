@@ -1,4 +1,5 @@
 version: 2
+enable-beta-ecosystems: true
 updates:
   # .github/workflows/ 配下の全 workflow が対象。SHA pin と横の # vN コメントを更新する。
   - package-ecosystem: github-actions
@@ -17,6 +18,17 @@ updates:
   # 素通りさせるので、dependabot-review スキルでレビューして手動マージする
   - package-ecosystem: nix
     directory: /
+    schedule:
+      interval: weekly
+      day: saturday
+      time: "08:00"
+      timezone: Asia/Tokyo
+    cooldown:
+      default-days: 2
+
+  - package-ecosystem: apm
+    directory: /
+    target-branch: test/dependabot-apm-v2
     schedule:
       interval: weekly
       day: saturday

@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.35.0
+apm_version: 0.34.0
 dependencies:
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
@@ -64,7 +64,7 @@ dependencies:
 - repo_url: anthropics/skills
   name: frontend-design
   host: github.com
-  resolved_commit: ca45fc496a3436251f191354091d557da31c15b5
+  resolved_commit: 2c5958ecac7cee2b583967a2c4981d0f4a75c579
   resolved_ref: main
   version: unknown
   virtual_path: skills/frontend-design

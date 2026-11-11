@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.35.0
+apm_version: 0.34.0
 dependencies:
 - repo_url: _local/template
   name: template
@@ -18,7 +18,6 @@ dependencies:
     .agents/skills/template-sync-review/SKILL.md: sha256:0fa37406100b0a4404dba4347f47e7049fd5f45c5586e7085ddd888a717a02a4
   source: local
   local_path: ./packages/template
-  content_hash: sha256:cea0a1ee21587a5a11cbaae9a2dc04bf20a595ddaccff9f35ebb2773178ff7de
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
   host: github.com
@@ -112,7 +111,7 @@ dependencies:
 - repo_url: cloudflare/security-audit-skill
   name: security-audit
   host: github.com
-  resolved_commit: d24bc269171a9171fac58493e0ffba511d571a4a
+  resolved_commit: c1c8a8c1471069fb0e188eeaff69b8e8db6564a8
   resolved_ref: main
   version: unknown
   virtual_path: skills/security-audit

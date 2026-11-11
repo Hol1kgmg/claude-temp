@@ -25,4 +25,5 @@ dependencies:
     - Hol1kgmg/skills/skills/japanese-tech-writing#main
 
     - Hol1kgmg/rules/rules/orca-worktree.instructions.md#main
+    - ./packages/template
     # --- 派生先管理 ---

@@ -1,6 +1,24 @@
 lockfile_version: '1'
-apm_version: 0.34.0
+apm_version: 0.35.0
 dependencies:
+- repo_url: _local/template
+  name: template
+  version: 0.0.0
+  package_type: skill_bundle
+  deployed_files:
+  - .agents/skills/bot-pr-routine
+  - .agents/skills/bot-pr-routine/SKILL.md
+  - .agents/skills/init-from-template
+  - .agents/skills/init-from-template/SKILL.md
+  - .agents/skills/template-sync-review
+  - .agents/skills/template-sync-review/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/bot-pr-routine/SKILL.md: sha256:180ec364ce47f7be238ef25956443384af699ea039759cfc9d56a6da874570f3
+    .agents/skills/init-from-template/SKILL.md: sha256:9bbe09ecb122e8a8d55970a3ebb6c859909566c32665ce4dd7256ba72274f49b
+    .agents/skills/template-sync-review/SKILL.md: sha256:0fa37406100b0a4404dba4347f47e7049fd5f45c5586e7085ddd888a717a02a4
+  source: local
+  local_path: ./packages/template
+  content_hash: sha256:cea0a1ee21587a5a11cbaae9a2dc04bf20a595ddaccff9f35ebb2773178ff7de
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
   host: github.com
@@ -94,7 +112,7 @@ dependencies:
 - repo_url: cloudflare/security-audit-skill
   name: security-audit
   host: github.com
-  resolved_commit: c1c8a8c1471069fb0e188eeaff69b8e8db6564a8
+  resolved_commit: d24bc269171a9171fac58493e0ffba511d571a4a
   resolved_ref: main
   version: unknown
   virtual_path: skills/security-audit
@@ -160,6 +178,60 @@ dependencies:
   package_type: claude_skill
   content_hash: sha256:aa0e458e2ffbba7817f265a4a18ddc47f57888faa6b785a1b1cbe434c7982cad
 deployments:
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/bot-pr-routine
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/template
+  active_owner: ./packages/template
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/bot-pr-routine/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/template
+  active_owner: ./packages/template
+  content_hash: sha256:180ec364ce47f7be238ef25956443384af699ea039759cfc9d56a6da874570f3
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/init-from-template
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/template
+  active_owner: ./packages/template
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/init-from-template/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/template
+  active_owner: ./packages/template
+  content_hash: sha256:9bbe09ecb122e8a8d55970a3ebb6c859909566c32665ce4dd7256ba72274f49b
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/template-sync-review
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/template
+  active_owner: ./packages/template
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/template-sync-review/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/template
+  active_owner: ./packages/template
+  content_hash: sha256:0fa37406100b0a4404dba4347f47e7049fd5f45c5586e7085ddd888a717a02a4
 - kind: project-relative
   target: claude
   value: .claude/rules/orca-worktree.md

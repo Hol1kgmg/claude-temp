@@ -1,0 +1,3 @@
+# 検証用: テンプレート独自の skill だけを置くローカルパッケージ。skills/ 配下は列挙しなくても配置される
+name: template
+version: 0.0.0

@@ -1,3 +1,4 @@
-# 検証用: テンプレート独自の skill だけを置くローカルパッケージ。skills/ 配下は列挙しなくても配置される
+# テンプレート管理。テンプレート独自の skill だけを置く。skills/ 配下は列挙しなくても配置される
+# 外部の依存はここに書かない。推移的な依存は Dependabot が更新しない（adr/from-template/0009）
 name: template
 version: 0.0.0

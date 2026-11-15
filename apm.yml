@@ -1,10 +1,10 @@
-# 検証用: 取得元をすべてルートに #main で直接書いたとき、Dependabot が取得元ごとに PR を立てるか
 name: project
 version: 0.0.0
 targets: [agent-skills, claude]
 dependencies:
   apm:
-    # --- テンプレート管理 ---
+    # テンプレート管理（派生先は末尾の区画を編集）。adr/from-template/0009
+    # Dependabot は ref を書いた直接の依存しか更新しないため、すべて #main を付けてここに直接書く
     - anthropics/skills/skills/frontend-design#main
     - anthropics/skills/skills/skill-creator#main
     - anthropics/skills/skills/webapp-testing#main
@@ -21,9 +21,14 @@ dependencies:
     - cloudflare/security-audit-skill/skills/security-audit#main
 
     - Hol1kgmg/skills/skills/dependabot-review#main
+    # gist は alias を付けられないため Hol1kgmg/skills に取り込んだものを使う（Hol1kgmg/skills#1）
     - Hol1kgmg/skills/skills/cognitive-rhythm-writing#main
     - Hol1kgmg/skills/skills/japanese-tech-writing#main
+    # 必要なリポジトリで末尾に足す: Hol1kgmg/skills/skills/speckit-explain#main
 
     - Hol1kgmg/rules/rules/orca-worktree.instructions.md#main
+    # 必要なリポジトリで末尾に足す: Hol1kgmg/rules/rules/code-comment.instructions.md#main など
+
     - ./packages/template
-    # --- 派生先管理 ---
+
+    # --- 派生先が管理。独自 skill は ./skills/<id>、独自 rule は ./rules/<id>.instructions.md。adr/from-template/0009 ---

@@ -1,4 +1,6 @@
 version: 2
+# apm ecosystem の beta 指定が不要になった（dependabot-core#16885）かを本番で確かめるまで残す
+enable-beta-ecosystems: true
 updates:
   # .github/workflows/ 配下の全 workflow が対象。SHA pin と横の # vN コメントを更新する。
   - package-ecosystem: github-actions
@@ -12,10 +14,20 @@ updates:
     cooldown:
       default-days: 2
 
-  # flake.lock の全 input が対象。skill / rules の取得元も flake = false な input なので
-  # ここに含まれ、input ごとに PR が立つ。skill / rules の PR だけ dependabot-auto-merge が
-  # 素通りさせるので、dependabot-review スキルでレビューして手動マージする
   - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: weekly
+      day: saturday
+      time: "08:00"
+      timezone: Asia/Tokyo
+    cooldown:
+      default-days: 2
+
+  # skill / rules はエージェントの挙動を変えるため、auto-merge せず dependabot-review でレビューする
+  # 更新されるのはルートの apm.yml に直接書いた依存だけ（adr/from-template/0009）
+  # cooldown は apm では効かないが、手動レビューで補う
+  - package-ecosystem: apm
     directory: /
     schedule:
       interval: weekly

@@ -2,21 +2,33 @@
 list:
     @just --list
 
-# Install skills into .claude/skills
-skills:
-    nix run .#skills-install-local
+# Install skills and rules into .agents/skills and .claude/rules
+apm:
+    apm install
 
-# List installed skills
-skills-list:
-    nix run .#skills-list
+# List installed skills and rules
+apm-list:
+    apm deps list
 
-# Install rules into .agents/rules
-rules:
-    nix run .#rules-install-local
-
-# List available rules
-rules-list:
-    nix run .#rules-list
+# Dependabot の apm 0.34.0 が書いた lock は content_hash が欠けて --frozen が通らない。dependabot-core#16792 のマージ後に消す
+# Regenerate apm.lock.yaml on a Dependabot PR and push it
+apm-fix-lock PR:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    [ -z "$(git status --porcelain)" ] || { echo "作業ツリーを clean にしてから実行する" >&2; exit 1; }
+    orig=$(git branch --show-current)
+    [ -n "$orig" ] || { echo "detached HEAD では実行しない。ブランチに切り替えてから実行する" >&2; exit 1; }
+    # upstream remote があると gh は origin より upstream を既定の repo に選ぶ
+    export GH_REPO=$(git remote get-url origin | sed -E 's#(\.git)?$##; s#.*github\.com[:/]##')
+    gh pr checkout {{PR}}
+    apm install
+    if git diff --quiet apm.lock.yaml; then
+        echo "lock は直す必要がない"
+    else
+        git commit -m "fix: apm.lock.yaml を手元の apm で作り直す" apm.lock.yaml
+        git push
+    fi
+    git switch "$orig"
 
 # Update flake.lock, then check
 update:
@@ -47,7 +59,7 @@ sync: _template-settled
     # マージコミットであることが必須。squash / rebase すると共通祖先が失われ、
     # 次回以降ツリー全体が衝突する（adr/from-template/0001）
     if git merge-base HEAD upstream/main >/dev/null 2>&1; then
-        git merge upstream/main --no-edit || { scripts/resolve-flake-lock.sh && git commit --no-edit; }
+        git merge upstream/main --no-edit || { scripts/resolve-locks.sh && git commit --no-edit; }
     else
         git merge upstream/main --allow-unrelated-histories --no-edit -X theirs
     fi

@@ -1,6 +1,8 @@
 .direnv/
 .agents/skills/
+# 旧 agent-rules の出力。移行前の clone に残るため ignore し続ける
 .agents/rules/
+.claude/rules/
 .claude/settings.local.json
 
 .env.keys
@@ -8,3 +10,4 @@
 
 .DS_Store
 *.log
+apm_modules/

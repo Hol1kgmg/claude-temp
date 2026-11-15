@@ -19,6 +19,8 @@ dependencies:
 
     - cloudflare/security-audit-skill/skills/security-audit#main
 
+    - nanaism/yomiyasu/skills/yomiyasu#main
+
     - Hol1kgmg/skills/skills/dependabot-review#main
     # gist は alias を付けられないため Hol1kgmg/skills に取り込んだものを使う（Hol1kgmg/skills#1）
     - Hol1kgmg/skills/skills/cognitive-rhythm-writing#main

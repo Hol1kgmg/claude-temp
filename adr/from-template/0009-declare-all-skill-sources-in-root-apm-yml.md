@@ -10,7 +10,7 @@ decision-makers: 'Hol1kgmg'
 
 [ADR 0008](0008-revert-skill-sources-to-flake-inputs.md) は、Dependabot の `apm` ecosystem が取得元ごとに PR を立てないことを理由に、APM から flake input に戻した。その後の調査で、0008 の判断の根拠は次のように整理し直せた。
 
-- {要記入: yomiyasu 側の問題の内容。0008 のどの観測が yomiyasu に起因していたか}
+- 0008 の「`git:` 形式は ref を書いても対象外」に当たる取得元は、gist の 2 件と yomiyasu だった。yomiyasu は `skills:` で skill を選ぶために `git:` 形式を外せない。gist は写しで文字列形式にできるので、yomiyasu を外せばこの制約に当たる取得元はなくなる
 - [ADR 0007](0007-manage-skills-and-rules-with-apm.md) の構成では、外部の取得元はすべて `packages/template/apm.yml` に書かれ、ルートの `apm.yml` はそれをローカルパスで参照するだけだった。Dependabot が更新の候補にするのは、そのディレクトリの `apm.yml` に直接書かれ、ref の付いた依存だけである（ジョブ定義の `"update-subdependencies": false`）。ルートから見ると外部の取得元は推移的な依存になり、`packages/template` 側は ref がなかったため、どちらのディレクトリでもチェックの対象が 0 件になった
 - 推移的な依存の commit はルートの `apm.lock.yaml` に記録されるので、版の固定はできる。できないのは、Dependabot による取得元ごとの更新である。`apm.yml` から別の `apm.yml` を呼び出すと、呼び出し先の依存はこの更新から外れる。呼び出し先がリポジトリの内か外かは関係しない
 
@@ -34,7 +34,7 @@ skill / rules の取得元と配置を APM に移す。0007 の構成のうち�
 - Good, because 取得元の追加はルートの `apm.yml` の 1 行で済む
 - Bad, because テンプレートと派生先が同じ `apm.yml` を編集する。区画を分けても、両側が近い行を変えれば衝突する。`apm.lock.yaml` の衝突は 0007 の `scripts/resolve-locks.sh` で解消する
 - Bad, because ブランチの ref は、取得元のリポジトリに commit があれば、その skill に関係しない変更でも PR になる
-- Bad, because gist の更新は Hol1kgmg/skills の同期を経由するので、届くまでに最大 1 週間遅れる
+- Bad, because gist の更新は Hol1kgmg/skills の同期を経由するので、同期の間隔に Dependabot の週次の間隔を足した分だけ遅れる。同期が週次なら最大 2 週間になる
 - Bad, because cooldown がかからない。検証では、作成から約 13 時間の commit で PR が立った
 - Bad, because dependabot-core#16792 がマージされるまで、skill / rules の PR ごとに `just apm-fix-lock` を実行する手間が増える。push すると Dependabot はその PR をリベースしなくなる
 
@@ -69,4 +69,5 @@ skill / rules の取得元と配置を APM に移す。0007 の構成のうち�
 - 前提: [skill / rules を Nix から APM に移す](0007-manage-skills-and-rules-with-apm.md)
 - 一部置き換え: [skill / rules の取得元を flake input にして Dependabot で更新する](0003-update-skill-sources-via-dependabot.md)、[skill / rules 以外の Dependabot PR を auto-merge する](0004-auto-merge-non-skill-dependabot-prs.md)、[テンプレート管理と派生先管理の宣言を別ファイル・別区画に分ける](0005-separate-template-and-project-files.md)（0007 で置き換え、0008 で戻した部分）
 - 検証の記録: https://github.com/Hol1kgmg/claude-temp/issues/49
+- 調査の詳細: [apm.yml から apm.yml を呼び出すと Dependabot で更新できなくなる](research/apm-nested-dependencies.md)
 - APM の依存の書き方: https://github.com/microsoft/apm/blob/main/docs/src/content/docs/consumer/manage-dependencies.md

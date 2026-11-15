@@ -34,6 +34,8 @@
             nix-claude-code.packages.${system}.claude-minimal
             pkgs.codex
             nixpkgs-unstable.legacyPackages.${system}.apm-cli
+            # yomiyasu スキルのスクリプトが使う
+            pkgs.python3
           ];
 
           shellHook = ''

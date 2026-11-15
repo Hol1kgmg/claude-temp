@@ -68,7 +68,7 @@ skill / rule の取得元の更新は Dependabot（`apm` ecosystem）が取得�
 
 ### Dependabot の apm PR
 
-Dependabot が使う apm（0.34.0）は手元と CI の apm（0.35.0）より古く、lock の書き方がずれます。PR の lock からローカルパッケージ（`./packages/template`）の `content_hash` が消え、CI の `apm install --frozen` が失敗します。マージ前に `just apm-fix-lock <PR 番号>` を実行すると、PR のブランチで `apm install` をやり直した lock を push します。[dependabot-core#16792](https://github.com/dependabot/dependabot-core/pull/16792) がマージされれば、この手順は不要になります。
+Dependabot が使う apm（0.34.0）は手元と CI の apm（0.35.0）より古く、lock の書き方がずれます。PR の lock からローカルパッケージ（`./packages/template`、`./packages/project`）の `content_hash` が消え、CI の `apm install --frozen` が失敗します。マージ前に `just apm-fix-lock <PR 番号>` を実行すると、PR のブランチで `apm install` をやり直した lock を push します。[dependabot-core#16792](https://github.com/dependabot/dependabot-core/pull/16792) がマージされれば、この手順は不要になります。
 
 ## 環境変数
 

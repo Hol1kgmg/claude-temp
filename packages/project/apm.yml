@@ -1,4 +1,3 @@
-# 派生先の独自の skill は .apm/skills/<id>/、rule は .apm/instructions/<id>.instructions.md に置けば列挙しなくても配置される
-# このファイルはテンプレート管理なので編集しない。外部の依存はここではなくルートの apm.yml に書く（adr/from-template/0009）
+# テンプレート管理。外部の依存は Dependabot が更新できるルートの apm.yml に書く（adr/from-template/0009）
 name: project-local
 version: 0.0.0

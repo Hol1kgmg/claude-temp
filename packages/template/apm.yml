@@ -1,4 +1,3 @@
-# テンプレート管理。テンプレート独自の skill は .apm/skills/<id>/、rule は .apm/instructions/<id>.instructions.md に置けば列挙しなくても配置される
-# 外部の依存はここに書かない。推移的な依存は Dependabot が更新しない（adr/from-template/0009）
+# 推移的な依存は Dependabot が更新しないため、外部の依存はルートの apm.yml に書く（adr/from-template/0009）
 name: template
 version: 0.0.0

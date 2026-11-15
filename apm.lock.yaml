@@ -7,7 +7,7 @@ dependencies:
   package_type: apm_package
   source: local
   local_path: ./packages/project
-  content_hash: sha256:60540443bb3f73f5129f6ed2cedb1434e47030414172e333b85a5322abb9631d
+  content_hash: sha256:af060b7290d5dd6d9571f8b88d33fbdc3f9aec5cfcd955db40b312262b3e0efe
 - repo_url: _local/template
   name: template
   version: 0.0.0
@@ -25,7 +25,7 @@ dependencies:
     .agents/skills/template-sync-review/SKILL.md: sha256:deda8f9dfa60bd112fd51e50192cf049ab10f95bd0871adcd3bf2681a747c47a
   source: local
   local_path: ./packages/template
-  content_hash: sha256:ba49bfe8d121d1ab0f4fe434472a404d4542d12a5080f90f49eaa1a2454870a7
+  content_hash: sha256:20bb8c95e9bc282a0def2bc61dfed53870a416f48de995938f2d3f8562e2f403
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
   host: github.com

@@ -38,7 +38,11 @@
 
           shellHook = ''
             lefthook install >/dev/null
-            apm install --frozen >/dev/null 2>&1 || echo "apm install --frozen に失敗した。apm.yml を変えたなら just apm を実行する" >&2
+            # CI は -c で apm install --frozen を直接呼んで失敗を拾うため、ここでは二重に走らせない
+            if [ -z "''${CI:-}" ] && ! out=$(apm install --frozen 2>&1); then
+              printf '%s\n' "$out" >&2
+              echo "apm install --frozen に失敗した。apm.yml を変えたなら just apm を実行する" >&2
+            fi
           '';
         };
 

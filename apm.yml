@@ -3,8 +3,7 @@ version: 0.0.0
 targets: [agent-skills, claude]
 dependencies:
   apm:
-    # テンプレート管理（派生先は末尾の区画を編集）。adr/from-template/0009
-    # Dependabot は ref を書いた直接の依存しか更新しないため、すべて #main を付けてここに直接書く
+    # テンプレート管理（派生先は末尾の区画を編集）。Dependabot は ref 付きの直接の依存しか更新しない（adr/from-template/0009）
     - anthropics/skills/skills/frontend-design#main
     - anthropics/skills/skills/skill-creator#main
     - anthropics/skills/skills/webapp-testing#main

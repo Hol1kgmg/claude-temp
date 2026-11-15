@@ -20,7 +20,9 @@ apm-fix-lock PR:
     [ -n "$orig" ] || { echo "detached HEAD では実行しない。ブランチに切り替えてから実行する" >&2; exit 1; }
     # upstream remote があると gh は origin より upstream を既定の repo に選ぶ
     export GH_REPO=$(git remote get-url origin | sed -E 's#(\.git)?$##; s#.*github\.com[:/]##')
-    gh pr checkout {{PR}}
+    trap 'git switch "$orig"' EXIT
+    # Dependabot が force-push した後は、手元に残った同名ブランチと食い違って checkout できない
+    gh pr checkout --force {{PR}}
     apm install
     if git diff --quiet apm.lock.yaml; then
         echo "lock は直す必要がない"
@@ -28,7 +30,6 @@ apm-fix-lock PR:
         git commit -m "fix: apm.lock.yaml を手元の apm で作り直す" apm.lock.yaml
         git push
     fi
-    git switch "$orig"
 
 # Update flake.lock, then check
 update:
@@ -58,8 +59,14 @@ sync: _template-settled
     # upstream 側を採用する。2 回目以降は独自変更を守るため通常マージ。
     # マージコミットであることが必須。squash / rebase すると共通祖先が失われ、
     # 次回以降ツリー全体が衝突する（adr/from-template/0001）
-    if git merge-base HEAD upstream/main >/dev/null 2>&1; then
-        git merge upstream/main --no-edit || { scripts/resolve-locks.sh && git commit --no-edit; }
+    if git merge-base --is-ancestor upstream/main HEAD; then
+        echo "取り込む更新はない"
+    elif git merge-base HEAD upstream/main >/dev/null 2>&1; then
+        git merge upstream/main --no-commit --no-ff || scripts/resolve-locks.sh
+        # 行単位のマージが衝突なしで通っても、両側の依存を合わせた lock が整合するとは限らない
+        apm install
+        git add apm.lock.yaml
+        git commit --no-edit
     else
         git merge upstream/main --allow-unrelated-histories --no-edit -X theirs
     fi

@@ -58,7 +58,6 @@ resolve_apm_lock() {
       # 書き戻さないと、派生側の依存が置いたファイルを apm が管理外とみなして上書きしない
       | .deployments = (.deployments // []) + project(.deployments // []; .value)
     ' | yq -p json -o yaml > apm.lock.yaml
-    apm install
     git add apm.lock.yaml
 }
 

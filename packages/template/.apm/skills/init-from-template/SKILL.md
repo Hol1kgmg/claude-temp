@@ -10,7 +10,7 @@ allowed-tools: Bash(git remote:*), Bash(git status:*), Bash(just sync:*), Bash(a
 
 ## 消してはいけないもの
 
-`just sync` はテンプレート元を **マージコミット** で取り込み続ける（[adr/from-template/0001](../../../../../adr/from-template/0001-sync-template-via-merge-commit.md)）。同期対象のファイルを派生側で削除すると、テンプレート元がそのファイルを後で変更した時点で modify/delete 衝突が毎回起きる。したがって次は削除しない:
+`just sync` はテンプレート元を **マージコミット** で取り込み続ける（[adr/from-template/0001](../../../adr/from-template/0001-sync-template-via-merge-commit.md)）。同期対象のファイルを派生側で削除すると、テンプレート元がそのファイルを後で変更した時点で modify/delete 衝突が毎回起きる。したがって次は削除しない:
 
 - `adr/from-template/`、`docs/`、`justfile` の `sync` レシピ、`.github/`、`packages/template/`（このスキル自身を含む）、`packages/project/apm.yml`
 - README.md の「テンプレート同期」節
@@ -90,7 +90,7 @@ Edit で行う。sed は使わない。
 
 **GitHub Actions による PR 作成の許可**
 
-`template-sync` workflow が draft PR を作るために要る（[adr/from-template/0006](../../../../../adr/from-template/0006-automate-template-sync-pr.md)）。新しいリポジトリでは既定で無効。
+`template-sync` workflow が draft PR を作るために要る（[adr/from-template/0006](../../../adr/from-template/0006-automate-template-sync-pr.md)）。新しいリポジトリでは既定で無効。
 
 ```bash
 gh api -X PUT repos/<owner>/<repo>/actions/permissions/workflow -F can_approve_pull_request_reviews=true

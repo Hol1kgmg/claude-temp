@@ -20,7 +20,9 @@ jobs:
           NUMBER: ${{ github.event.pull_request.number }}
           PR: ${{ github.event.pull_request.html_url }}
         run: |
-          if gh api --paginate "repos/$REPO/pulls/$NUMBER/files" -q '.[].filename' | grep -qE '(^|/)apm(\.lock)?\.ya?ml$'; then
+          # if の条件に gh を入れると、API の失敗が偽として扱われて auto-merge に進む
+          files=$(gh api --paginate "repos/$REPO/pulls/$NUMBER/files" -q '.[].filename')
+          if grep -qE '(^|/)apm(\.lock)?\.ya?ml$' <<<"$files"; then
             echo "skill / rules の取得元を更新するため手動レビューに回す"
             exit 0
           fi

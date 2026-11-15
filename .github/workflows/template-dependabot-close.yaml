@@ -22,7 +22,9 @@ jobs:
           PR: ${{ github.event.pull_request.html_url }}
         run: |
           raw() { gh api -H 'Accept: application/vnd.github.raw' "repos/$1/contents/$2?ref=$3"; }
-          for f in $(gh api --paginate "repos/$REPO/pulls/$NUMBER/files" -q '.[].filename'); do
+          # for の中で gh を呼ぶと、API の失敗が空の一覧になって PR を閉じる
+          files=$(gh api --paginate "repos/$REPO/pulls/$NUMBER/files" -q '.[].filename')
+          for f in $files; do
             if [ "$f" = flake.lock ]; then
               raw "$REPO" flake.lock "$BASE" > base.json
               raw "$REPO" flake.lock "$HEAD" > head.json
@@ -58,8 +60,8 @@ jobs:
               exit 0
             else
               # 同じ workflow ファイルでも派生側が足した action はテンプレートからは更新されない
-              for a in $(gh api --paginate "repos/$REPO/pulls/$NUMBER/files" -q ".[] | select(.filename == \"$f\") | .patch" \
-                  | grep -oE '^\+.*uses: *[^@ ]+@' | sed -E 's/.*uses: *//'); do
+              patch=$(gh api --paginate "repos/$REPO/pulls/$NUMBER/files" -q ".[] | select(.filename == \"$f\") | .patch")
+              for a in $(grep -oE '^\+.*uses: *[^@ ]+@' <<<"$patch" | sed -E 's/.*uses: *//'); do
                 if ! grep -qF "$a" <<<"$tpl"; then
                   echo "テンプレートが使っていない action を含むため残す: $f $a"
                   exit 0

@@ -70,6 +70,8 @@ skill / rule の取得元の更新は Dependabot（`apm` ecosystem）が取得�
 
 Dependabot が使う apm（0.34.0）は手元と CI の apm（0.35.0）より古く、lock の書き方がずれます。PR の lock からローカルパッケージ（`./packages/template`、`./packages/project`）の `content_hash` が消え、CI の `apm install --frozen` が失敗します。マージ前に `just apm-fix-lock <PR 番号>` を実行すると、PR のブランチで `apm install` をやり直した lock を push します。[dependabot-core#16792](https://github.com/dependabot/dependabot-core/pull/16792) がマージされれば、この手順は不要になります。
 
+`just apm-fix-lock` で commit を足した PR は、Dependabot が rebase しなくなります。apm の PR が複数あるときは 1 件ずつマージし、そのたびに残りの PR に `@dependabot recreate` とコメントしてから、作り直された PR で `just apm-fix-lock` をやり直してください。
+
 ## 環境変数
 
 `.env*` は [dotenvx](https://dotenvx.com/) で暗号化してコミットします。復号鍵の `.env.keys` は gitignore 済みなので、チームにはリポジトリ外で共有してください。

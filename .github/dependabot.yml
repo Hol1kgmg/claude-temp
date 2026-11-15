@@ -24,9 +24,7 @@ updates:
     cooldown:
       default-days: 2
 
-  # skill / rules はエージェントの挙動を変えるため、auto-merge せず dependabot-review でレビューする
-  # 更新されるのはルートの apm.yml に直接書いた依存だけ（adr/from-template/0009）
-  # cooldown は apm では効かないが、手動レビューで補う
+  # skill / rules はエージェントの挙動を変えるため auto-merge せずレビューする。cooldown は apm では効かない（adr/from-template/0009）
   - package-ecosystem: apm
     directory: /
     schedule:
@@ -34,5 +32,3 @@ updates:
       day: saturday
       time: "08:00"
       timezone: Asia/Tokyo
-    cooldown:
-      default-days: 2

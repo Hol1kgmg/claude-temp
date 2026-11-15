@@ -1,10 +1,17 @@
 lockfile_version: '1'
 apm_version: 0.35.0
 dependencies:
+- repo_url: _local/project
+  name: project-local
+  version: 0.0.0
+  package_type: apm_package
+  source: local
+  local_path: ./packages/project
+  content_hash: sha256:60540443bb3f73f5129f6ed2cedb1434e47030414172e333b85a5322abb9631d
 - repo_url: _local/template
   name: template
   version: 0.0.0
-  package_type: skill_bundle
+  package_type: apm_package
   deployed_files:
   - .agents/skills/bot-pr-routine
   - .agents/skills/bot-pr-routine/SKILL.md
@@ -14,11 +21,11 @@ dependencies:
   - .agents/skills/template-sync-review/SKILL.md
   deployed_file_hashes:
     .agents/skills/bot-pr-routine/SKILL.md: sha256:418ced00e03c74c411c97befdd26e63d20eba20119966336c63c80601485c9e9
-    .agents/skills/init-from-template/SKILL.md: sha256:ec48f4d4408a3bb78085b95ed7af622d7586f128ac4f71e1f06fa594f5571d55
+    .agents/skills/init-from-template/SKILL.md: sha256:3a28ef86d8bd25409051f692484f46a8383e3008d81c0c8bcea12a3e37d95306
     .agents/skills/template-sync-review/SKILL.md: sha256:deda8f9dfa60bd112fd51e50192cf049ab10f95bd0871adcd3bf2681a747c47a
   source: local
   local_path: ./packages/template
-  content_hash: sha256:de0d9c8394588a15bad84f33b03e3f18bb7cc21c519bd2f6b4d5e9b746f89d78
+  content_hash: sha256:ba49bfe8d121d1ab0f4fe434472a404d4542d12a5080f90f49eaa1a2454870a7
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
   host: github.com
@@ -686,7 +693,7 @@ deployments:
   owners:
   - ./packages/template
   active_owner: ./packages/template
-  content_hash: sha256:ec48f4d4408a3bb78085b95ed7af622d7586f128ac4f71e1f06fa594f5571d55
+  content_hash: sha256:3a28ef86d8bd25409051f692484f46a8383e3008d81c0c8bcea12a3e37d95306
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/japanese-tech-writing

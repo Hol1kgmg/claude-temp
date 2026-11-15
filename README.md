@@ -50,7 +50,7 @@ direnv allow
 
 エージェント用のスキルとルールは [APM](https://github.com/microsoft/apm) で管理し、`apm.yml` の宣言から devShell 起動時に
 スキルは `.agents/skills`、ルールは `.claude/rules` へ同期されます（`just apm` / `just apm-list`）。
-取得元の版は `apm.lock.yaml` に固定し、独自スキルは [skills/](skills/)、独自ルールは [rules/](rules/) に置きます。
+取得元の版は `apm.lock.yaml` に固定し、独自スキルは `packages/project/.apm/skills/<id>/`、独自ルールは `packages/project/.apm/instructions/<id>.instructions.md` に置きます。
 
 ### テンプレート管理と派生先管理の分離
 
@@ -58,7 +58,7 @@ direnv allow
 
 | 派生先が編集する | テンプレートが管理する（編集しない） |
 |---|---|
-| `apm.yml` の `dependencies.apm` 末尾の「派生先が管理」区画（skill / rule の追加） | `apm.yml` のそれ以外、`packages/template/` |
+| `apm.yml` の `dependencies.apm` 末尾の「派生先が管理」区画（外部の skill / rule の追加）、`packages/project/.apm/`（独自の skill / rule） | `apm.yml` のそれ以外、`packages/template/`、`packages/project/apm.yml` |
 | `flake.nix` の `inputs` 末尾の「project inputs」区画 | `flake.nix` の `inputs` のそれ以外 |
 | `flake.nix` 末尾の `devShells.default` | `flake.nix` の `devShells.template` |
 

@@ -30,5 +30,6 @@ dependencies:
     # 必要なリポジトリで末尾に足す: Hol1kgmg/rules/rules/code-comment.instructions.md#main など
 
     - ./packages/template
+    - ./packages/project
 
-    # --- 派生先が管理。独自 skill は ./skills/<id>、独自 rule は ./rules/<id>.instructions.md。adr/from-template/0009 ---
+    # --- 派生先が管理。外部の取得元だけを書く。独自の skill / rule は packages/project/.apm/ に置く。adr/from-template/0009 ---

@@ -21,7 +21,8 @@ Dependabot で取得元ごとに更新するには、外部の取得元をすべ
 skill / rules の取得元と配置を APM に移す。0007 の構成のうち、宣言の置き場所を次のように変える。
 
 - 外部の取得元は、すべてルートの `apm.yml` に `owner/repo/path#main` の形で直接書く。テンプレート管理の区画と派生先管理の区画をコメントで分け、派生先は末尾の区画だけを編集する（[ADR 0005](0005-separate-template-and-project-files.md) の「別区画」）
-- テンプレート独自の skill（init-from-template、template-sync-review、bot-pr-routine）は `packages/template/skills/` に置き、ルートからローカルパス `./packages/template` で参照する。ローカルなので Dependabot の対象外だが、テンプレート取り込み PR で届くので更新は要らない
+- テンプレート独自の skill（init-from-template、template-sync-review、bot-pr-routine）は `packages/template/.apm/skills/` に置き、ルートからローカルパス `./packages/template` で参照する。ローカルなので Dependabot の対象外だが、テンプレート取り込み PR で届くので更新は要らない。テンプレート独自の rule を足すときは `packages/template/.apm/instructions/` に置く。パッケージ直下の `rules/` は apm が配置しないため、skill も rule と同じ `.apm/` の下に揃える
+- 派生先の独自の skill / rule は `packages/project/.apm/skills/` と `packages/project/.apm/instructions/` に置き、ルートから `./packages/project` で参照する。`packages/project/apm.yml` はテンプレートが用意して変えないので、取り込みで衝突しない。リポジトリ直下の `skills/` と `rules/` は置かない
 - gist の skill（cognitive-rhythm-writing、japanese-tech-writing）は、Hol1kgmg/skills に定期的に写したものを参照する（Hol1kgmg/skills#1）。gist を直接書くと、名前を付けられる `git:` 形式は Dependabot の対象外で、文字列形式では配置先のディレクトリ名が gist の ID になるため
 - yomiyasu はテンプレートから外す
 - Dependabot の `apm` は `directory: /` だけを見る
@@ -40,8 +41,8 @@ skill / rules の取得元と配置を APM に移す。0007 の構成のうち�
 
 ## Implementation Plan
 
-- **Affected paths**: `apm.yml`、`apm.lock.yaml`、`packages/template/`、`flake.nix`、`flake.lock`、`justfile`、`scripts/resolve-locks.sh`、`.github/dependabot.yml`、`.github/workflows/`、`.gitignore`、`README.md`、`docs/lockfile-automation.md`、`skills/README.md`、`rules/README.md`、`.codex/rules/README.md`
-- **Removed**: `sources*.nix`、`skills*.nix`、`rules*.nix`、`scripts/resolve-flake-lock.sh`、`rules/orca-worktree.md`（Hol1kgmg/rules から取得する）、`.claude/rules`（symlink）、`skills/` の 3 つの skill（`packages/template/skills/` に移す）
+- **Affected paths**: `apm.yml`、`apm.lock.yaml`、`packages/template/`、`packages/project/`、`flake.nix`、`flake.lock`、`justfile`、`scripts/resolve-locks.sh`、`.github/dependabot.yml`、`.github/workflows/`、`.gitignore`、`README.md`、`docs/lockfile-automation.md`、`.codex/rules/README.md`
+- **Removed**: `sources*.nix`、`skills*.nix`、`rules*.nix`、`scripts/resolve-flake-lock.sh`、`rules/orca-worktree.md`（Hol1kgmg/rules から取得する）、`.claude/rules`（symlink）、`skills/` の 3 つの skill（`packages/template/.apm/skills/` に移す）、`skills/README.md`、`rules/README.md`（独自の skill / rule は `packages/project/.apm/` に置く）
 - **Dependencies**: Hol1kgmg/skills#1（gist の写し）
 - **Patterns to avoid**:
   - 外部の取得元を `packages/template/apm.yml` など、ルート以外の `apm.yml` に書くこと

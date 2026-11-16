@@ -7,6 +7,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 # 検証はここで行う。書き込み権限を持たせない
 permissions:
   contents: read
@@ -14,11 +18,16 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+    # jactionlint はバイナリキャッシュが無く、毎回ソースからビルドする
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@v5.1.0
         with:
           persist-credentials: false
-      - uses: DeterminateSystems/nix-installer-action@786fff0690178f1234e4e1fe9b536e94f5433196 # v20
+      - uses: DeterminateSystems/nix-installer-action@v20
       # resolve-locks.sh の書き戻しと flake.nix のずれを、lock の自動更新で隠さない
       - run: nix flake check --no-update-lock-file
       - run: nix develop .#template --no-update-lock-file -c apm install --frozen
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: nix develop .#template --no-update-lock-file -c just lint-actions

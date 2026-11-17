@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.35.0
+apm_version: 0.34.0
 dependencies:
 - repo_url: _local/project
   name: project-local
@@ -7,7 +7,6 @@ dependencies:
   package_type: apm_package
   source: local
   local_path: ./packages/project
-  content_hash: sha256:af060b7290d5dd6d9571f8b88d33fbdc3f9aec5cfcd955db40b312262b3e0efe
 - repo_url: _local/template
   name: template
   version: 0.0.0
@@ -25,7 +24,6 @@ dependencies:
     .agents/skills/template-sync-review/SKILL.md: sha256:deda8f9dfa60bd112fd51e50192cf049ab10f95bd0871adcd3bf2681a747c47a
   source: local
   local_path: ./packages/template
-  content_hash: sha256:20bb8c95e9bc282a0def2bc61dfed53870a416f48de995938f2d3f8562e2f403
 - repo_url: addyosmani/web-quality-skills
   name: accessibility
   host: github.com
@@ -205,7 +203,7 @@ dependencies:
 - repo_url: anthropics/skills
   name: webapp-testing
   host: github.com
-  resolved_commit: 1780c5e5a552fd4d1c9d6a7b0cab26b0c2bef064
+  resolved_commit: e4bb5d960d87126ff3b3a8af1a104b7db67560ba
   resolved_ref: main
   version: unknown
   virtual_path: skills/webapp-testing

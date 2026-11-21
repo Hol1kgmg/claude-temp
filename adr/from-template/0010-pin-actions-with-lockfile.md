@@ -16,7 +16,7 @@ workflow の `uses:` はフル SHA と `# vN` コメントで固定していた�
 
 - `uses:` はタグで書き、コミットを `.github/workflows/actions.lock` に固定する。移行時のコミットは SHA pin と同じ（`actions/checkout` は `fbc6f39`、`nix-installer-action` は `786fff0`）
 - `jactionlint`（default プロファイル）と `gh-actions-lock --verify` を `just lint-actions` にまとめ、CI の `check` で実行する。必須チェックの名前は変えない
-- 両ツールは nixpkgs-unstable から入れる。devenv-nixpkgs には `jactionlint` が無く、`gh-actions-lock` も古い
+- 両ツールは nixpkgs-unstable から入れる。devenv-nixpkgs の `jactionlint` と `gh-actions-lock` は古い
 - `dependabot-cooldown` の下限は 2 日に下げる。テンプレートの Dependabot PR を、派生側の template-sync（土曜 09:00）より前に処理するため
 - `actions.lock` の衝突は `scripts/resolve-locks.sh` で解消する。テンプレート側の lock に、派生側だけの workflow と action を書き戻す
 - Require lockfile ポリシーはまだ有効にしない

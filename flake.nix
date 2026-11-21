@@ -34,7 +34,7 @@
             nix-claude-code.packages.${system}.claude-minimal
             pkgs.codex
             nixpkgs-unstable.legacyPackages.${system}.apm-cli
-            # devenv-nixpkgs には jactionlint が無く、gh-actions-lock も古い
+            # devenv-nixpkgs の jactionlint と gh-actions-lock は古い
             nixpkgs-unstable.legacyPackages.${system}.jactionlint
             nixpkgs-unstable.legacyPackages.${system}.gh-actions-lock
             # 無いと jactionlint は run: のスクリプトを検査せずに通す

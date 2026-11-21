@@ -16,7 +16,7 @@ workflow の `uses:` はフル SHA と `# vN` コメントで固定していた�
 
 - `uses:` はタグで書き、コミットを `.github/workflows/actions.lock` に固定する。移行時のコミットは SHA pin と同じ（`actions/checkout` は `fbc6f39`、`nix-installer-action` は `786fff0`）
 - `jactionlint`（default プロファイル）と `gh-actions-lock --verify` を `just lint-actions` にまとめ、CI の `check` で実行する。必須チェックの名前は変えない
-- 両ツールは nixpkgs-unstable から入れる。devenv-nixpkgs には `jactionlint` が無く、`gh-actions-lock` も古い。`jactionlint` 2.4.0 は、テストが前提にする runner ラベルの一覧が古くなって落ちるため、`doCheck = false` でビルドする。バイナリキャッシュは無い
+- 両ツールは nixpkgs-unstable から入れる。devenv-nixpkgs の `jactionlint` と `gh-actions-lock` は古い
 - `dependabot-cooldown` の下限は 2 日に下げる。テンプレートの Dependabot PR を、派生側の template-sync（土曜 09:00）より前に処理するため
 - `actions.lock` の衝突は `scripts/resolve-locks.sh` で解消する。テンプレート側の lock に、派生側だけの workflow と action を書き戻す
 - Require lockfile ポリシーはまだ有効にしない
@@ -25,7 +25,6 @@ workflow の `uses:` はフル SHA と `# vN` コメントで固定していた�
 
 - Good, because 推移的な依存も固定され、lockfile の更新漏れを `check` が検出する
 - Good, because `jactionlint` が permissions、timeout、pipefail などの問題を PR の時点で検出する
-- Bad, because CI のたびに `jactionlint` をソースからビルドするため、`check` の実行時間が延びる
 - Bad, because `resolve-locks.sh` が yq で書き直した lockfile は、ヘッダーのコメントとクォートを失う。ツールは読めるが、次に `gh-actions-lock` を実行したときに差分が出る
 - Neutral, because Dependabot の `github-actions` 更新が lockfile も一緒に更新するかは、まだ本番で確認していない。更新しなかった場合は `check` が落ちて自動マージが止まるので、PR のブランチで `gh-actions-lock` を実行して push する
 
